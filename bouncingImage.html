@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2016 by alexanderdurbin (http://jsbin.com/ruxawu/5/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Bounce Time!</title>
+  
+<style id="jsbin-css">
+
+#animated {
+  position: absolute;
+}
+
+#startStop{
+	position: relative;
+}
+
+#startStop:hover{
+	cursor:pointer;
+}
+
+#theImg{
+	position: relative;
+}
+
+h1:hover{
+  color: blue;
+}
+
+/*second image gets hidden :) */
+#imgHolder > img + img{  
+	display: none;
+}
+
+</style>
+</head>
+<body>
+	
+	<h1 align = center>It's-a me, Mario!</h1>
+	<p id = "instruct"> Click Mario!</p>
+
+	<div id = "animated">
+		<div id = "startStop" onclick="pauseResume()">
+			<div id = "imgHolder">
+				<img src = "mario_01.png"/>
+				<img src = "mario_02.png"/>
+			</div>
+		</div>
+	</div>
+	
+	
+<script id="jsbin-javascript">
+
+var xVel = 1; // xVelocity==1 move right, ==0 move left
+var yVel = 1; // yVelocity==1 move down, ==0 move up
+var delay = 5; //increase this to move faster
+var xMax = window.innerWidth; //farthest right
+var yMax = window.innerHeight; //farthest down
+var pause = false; //move or not?
+var interval; //interval holder
+
+//image properties
+var myImage = document.getElementById("animated");
+var right = myImage.clientWidth; //image width
+var bottom = myImage.clientHeight; //image height
+var xPos = myImage.style.left; // where to move horizontal
+var yPos = myImage.style.top; // where to move vertical
+
+//separate interval and delay to cycle images.
+var imgInterval;
+var imgDelay = delay + 150;
+var container = document.getElementById("imgHolder").children;	//div that has the images will cycle display vals
+
+function myMove(){
+	//update position 
+	myImage.style.left = xPos + "px";
+	myImage.style.top = yPos + "px";
+	
+	if(xVel){
+		xPos++;
+	}else{
+		xPos--;
+	}
+	if(yVel){
+		yPos++;
+	}else{
+		yPos--;
+  }
+  
+
+  //check for collision with edges
+  if(xPos+right >= xMax){
+    xVel = 0;
+	turnAround();
+  } else if (xPos < 0){
+    xVel = 1;
+	turnAround();
+  }
+  if(yPos+bottom >= yMax){
+    yVel = 0;
+  } else if(yPos < 0){
+    yVel = 1;
+  }
+  
+}
+
+
+//when image is clicked, stop or start movement
+function pauseResume(){
+  if(pause) {
+	//change instructions
+	document.getElementById("instruct").innerHTML = "Click again to start.";
+	//stop intervals
+    clearInterval(interval);
+	clearInterval(imgInterval);
+    //reset pause
+	pause = false;
+  } else {
+	//change instructions
+	document.getElementById("instruct").innerHTML = "Click again to stop. If you can catch him!";
+    //start intervals
+	interval = setInterval(myMove,delay);
+	imgInterval = setInterval(walk, imgDelay);
+
+	pause = true;  
+  }
+}
+
+//cycle images
+function walk(){
+	if(xPos%2 == 0){
+		container[0].style.display = "none";
+		container[1].style.display = "inline";
+	}else{
+		container[0].style.display = "inline";
+		container[1].style.display = "none";
+	}
+}
+
+
+function turnAround(){
+	if(xVel == 0){
+		container[0].style.transform = "scaleX(-1)";
+		container[1].style.transform = "scaleX(-1)";
+	}else{
+		container[0].style.transform = "scaleX(1)";
+		container[1].style.transform = "scaleX(1)";
+	}
+}
+
+</script>
+</body>
+</html>

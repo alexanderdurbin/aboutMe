@@ -1,0 +1,85 @@
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+#menubutton{
+  top: 0;
+  left: 0;
+  position: relative;
+  padding-top: 60px;
+  font-size: 36px;
+  width: 50px;
+  height: 50px;
+}
+
+#menubutton:hover{
+	opacity: .5;
+	cursor: pointer;
+}
+
+.sidebar .closebtn{
+	padding-top: 5px;
+	padding-left: 5px;
+	
+  transition: inherit;
+  overflow-x: inherit;
+  width:50px;
+  color: white;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+/* The side navigation menu */
+.sidebar {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0;
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.3s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.5s
+}
+
+.sidebar a:hover{
+  color: #f1f1f1;
+}
+
+/* push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left 0.5s;
+  padding: 20px;
+}
+
+.banner{
+  height: 300px;
+  background-size:contain; /*fit in your place*/
+  background-repeat: no-repeat; /*no tiling here*/
+  overflow: hidden; /*no peeking at side content!*/
+  padding-top: 30px;
+}
+
+.content{
+  font-family: "Open Sans", sans-serif;
+}
+
+#pageHead{
+	position: fixed;
+	text-align: center;
+}
+
+#imageContainer{
+  height:inherit;
+}
